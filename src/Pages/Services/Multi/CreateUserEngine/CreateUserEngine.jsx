@@ -104,7 +104,7 @@ let CreateUserEngine = () => {
 
                 {createUserFetchSuccess &&
                  <small className='note'>
-                    {createUserFetchSuccess == "user created correctly" ? "تم إنشاء المستخدم تفقد بريدك الألكتروني" : null}
+                    {createUserFetchSuccess == "user created correctly" ? "تم إنشاء المستخدم تفقد البريدك الألكتروني" : null}
                 </small>}
 
                 {createUserFetchErrors &&
@@ -112,7 +112,7 @@ let CreateUserEngine = () => {
                     {createUserFetchErrors.statusText == "this email already existe" ?
                     "هذا البريد الألكتروني مُسجل من قبل" :
                     createUserFetchErrors.statusText.errors[0].param == "password" ?
-                    "يرجي أن تزيد كلمه المرور عن 8 حروف و اقل من 16" :
+                    "يرجي أن تزيد كلمه المرور عن 8 حروف" :
                      null}
                  </small>}
                 <input type="submit" className="submit" value="إنشاء"/>

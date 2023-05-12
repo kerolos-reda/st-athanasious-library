@@ -21,8 +21,8 @@ let ChangePassword = ({ onClickForChangePassword }) => {
       e.preventDefault()
       try {
           const change = await changePassword(changePasswordFetch ,user.token);
-          document.body.classList.toggle("hidden");
-          return onClickForChangePassword()
+          sessionStorage.removeItem("user");
+          return document.location.reload();
       }catch(err){
           setChangePasswordFetchError(err);
           return setTimeout(() => setChangePasswordFetchError(null), 5000);
@@ -35,13 +35,27 @@ let ChangePassword = ({ onClickForChangePassword }) => {
         <div className="header-collection">
             <div className="service-name">تعديل البيانات</div>
             <Link>
-              <FontAwesomeIcon onClick={onClickForChangePassword} icon={faClose} size="2xl" className="close-icon"/>
+              <FontAwesomeIcon 
+              onClick={onClickForChangePassword} 
+              icon={faClose} size="2xl" 
+              className="close-icon"/>
             </Link>
         </div>
         <form action="" method='POST' onSubmit={handleSubmit} className="Change-password-form">
             <div className="collection">
-                <input type="password" name='old_password' onChange={handleChange} value={changePasswordFetch.old_password} placeholder='إدخل كلمه المرور القديمه' className="old-password" />
-                <input type="password" name='new_password' onChange={handleChange} value={changePasswordFetch.new_password} placeholder='إدخل كلمه المرور الجديده' className="new-password" />
+                <input type="password" 
+                name='old_password' 
+                onChange={handleChange} 
+                value={changePasswordFetch.old_password} 
+                placeholder='إدخل كلمه المرور القديمه' 
+                className="old-password" />
+                
+                <input type="password" 
+                name='new_password' 
+                onChange={handleChange} 
+                value={changePasswordFetch.new_password} 
+                placeholder='إدخل كلمه المرور الجديده' 
+                className="new-password" />
             </div>
             {changePasswordFetchError && <small className='note'>
               {changePasswordFetchError.statusText == "you used this password before try another password" ?

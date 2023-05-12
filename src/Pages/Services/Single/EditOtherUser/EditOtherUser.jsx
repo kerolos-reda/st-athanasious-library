@@ -89,13 +89,13 @@ let EditOtherUser = ({ ocClickForEditOtherUser }) => {
                         </select>                    
                     </div>
                 </div>
-                {editOtherUserFetchError && <small className='note'>
-                    {editOtherUserFetchError.statusText.errors[0].param == "phone_number" ?
-                    "رقم الهاتف غير صحيح" :
-                    editOtherUserFetchError.statusText.errors[0].param == "email" ?
-                    "البريد الألكتروني غير صحيح" :
-                     null}
-                </small>}
+                {editOtherUserFetchError && <small className='note'>{editOtherUserFetchError.statusText == "this email already existe" ?
+                 "البريد الألكتروني يوجد بالفعل أو رقم الهاتف" :
+                 editOtherUserFetchError.statusText["errors"][0].param == "email" ?
+                  "يرجي كتابه البريد الالكتروني" :
+                  editOtherUserFetchError.statusText["errors"][0].param == "phone_number" ? 
+                  "يرجي كتابه رقم الهاتف" : 
+                  null}</small>}
                 <input type="submit" className="submit" value="حفظ"/>
             </form>
         </div>
