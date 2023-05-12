@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import { resetPassword } from "../../APIs";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
 import "./ResetPassword.scss";
 
 let ResetPassword = () => {
@@ -20,8 +20,9 @@ let ResetPassword = () => {
         e.preventDefault()
         try {
             const reset = await resetPassword(resetPasswordFeatch , token);
-            setResetPasswordSuccess(err);
-            return setTimeout(() => setResetPasswordSuccess(null), 5000);        
+            setResetPasswordSuccess(reset);
+            setTimeout(() => setResetPasswordSuccess(null), 5000);
+            return setTimeout(() => redirect("/"), 5000);        
         }catch(err){
             setResetPasswordErrors(err);
             return setTimeout(() => setResetPasswordErrors(null), 5000);
@@ -41,7 +42,7 @@ let ResetPassword = () => {
                 className="new-password"/>
             </div>
             {resetPasswordESuccess && <small className='note'>تم تغيير كلمه المرور يرجي تسجيل الدخول مجددا</small>}
-            {resetPasswordErrors && <small className='note'>يرجي أن تزيد كلمه المرور عن 8 حروف و اقل من 16</small>}
+            {resetPasswordErrors && <small className='note'>يرجي أن تزيد كلمه المرور عن 8 حروف</small>}
             <input type="submit" className="submit" value="إرسال"/>
         </form>
     </div>
