@@ -1,6 +1,6 @@
 import React , {useState} from "react";
 import { resetPassword } from "../../APIs";
-import { redirect, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./ResetPassword.scss";
 
 let ResetPassword = () => {
@@ -22,7 +22,7 @@ let ResetPassword = () => {
             const reset = await resetPassword(resetPasswordFeatch , token);
             setResetPasswordSuccess(reset);
             setTimeout(() => setResetPasswordSuccess(null), 5000);
-            return setTimeout(() => redirect("/"), 5000);        
+            return setTimeout(() => document.location.replace('/') , 5000);
         }catch(err){
             setResetPasswordErrors(err);
             return setTimeout(() => setResetPasswordErrors(null), 5000);
